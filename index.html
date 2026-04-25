@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Nashville Sessions — June 10–14, 2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23b8943f'/%3E%3Cstop offset='1' stop-color='%236b1a2a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' fill='%231c0f08'/%3E%3Cg transform='translate(32 32) rotate(-35)'%3E%3Crect x='-2' y='-22' width='4' height='18' fill='%23d4a843'/%3E%3Crect x='-5' y='-26' width='10' height='5' rx='1' fill='%23ede5d4'/%3E%3Ccircle cx='-2.5' cy='-24.5' r='0.7' fill='%231c0f08'/%3E%3Ccircle cx='2.5' cy='-24.5' r='0.7' fill='%231c0f08'/%3E%3Cellipse cx='0' cy='6' rx='13' ry='17' fill='url(%23b)'/%3E%3Cpath d='M-7 -2 Q0 -6 7 -2 Q9 6 7 14 Q0 18 -7 14 Q-9 6 -7 -2 Z' fill='none' stroke='%231c0f08' stroke-width='1' opacity='0.3'/%3E%3Ccircle cx='0' cy='6' r='5' fill='%231c0f08'/%3E%3Cg stroke='%23ede5d4' stroke-width='0.5' opacity='0.7'%3E%3Cline x1='-1.5' y1='-22' x2='-1.5' y2='14'/%3E%3Cline x1='-0.5' y1='-22' x2='-0.5' y2='14'/%3E%3Cline x1='0.5' y1='-22' x2='0.5' y2='14'/%3E%3Cline x1='1.5' y1='-22' x2='1.5' y2='14'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Bodoni+Moda:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -91,32 +92,6 @@
     z-index: 10;
     max-width: 800px;
     width: 100%;
-  }
-
-  .track-label {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeIn 1s ease 0.3s forwards;
-  }
-
-  .track-label::before, .track-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--tape);
-    opacity: 0.4;
-  }
-
-  .track-label span {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.3em;
-    color: var(--tape);
-    text-transform: uppercase;
-    white-space: nowrap;
   }
 
   .hero-title {
@@ -209,20 +184,23 @@
     align-items: center;
   }
 
-  nav a {
+  nav button {
     font-family: 'DM Mono', monospace;
     font-size: 0.62rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(244,239,230,0.7);
-    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
     padding: 0.9rem 1.6rem;
     transition: background 0.2s, color 0.2s;
     border-right: 1px solid rgba(255,255,255,0.08);
   }
 
-  nav a:first-child { border-left: 1px solid rgba(255,255,255,0.08); }
-  nav a:hover { background: var(--wine); color: var(--linen); }
+  nav button:first-child { border-left: 1px solid rgba(255,255,255,0.08); }
+  nav button:hover { background: var(--wine); color: var(--linen); }
+  nav button.active { background: var(--wine); color: var(--linen); }
 
   /* ── SHARED ── */
   .section-wrap {
@@ -287,6 +265,9 @@
 
   .panel { display: none; }
   .panel.active { display: block; }
+
+  .section-panel { display: none; }
+  .section-panel.active { display: block; }
 
   /* ── CARDS ── */
   .stops {
@@ -388,43 +369,6 @@
   }
 
   .card-link:hover { border-color: var(--burgundy); }
-
-  /* ── MAP ── */
-  .map-strip {
-    background: var(--parchment);
-    border-top: 1px solid var(--blush);
-    border-bottom: 1px solid var(--blush);
-    padding: 5rem 2rem;
-  }
-
-  .map-strip .section-wrap { padding: 0; max-width: 1080px; margin: 0 auto; }
-
-  .map-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    border: 1px solid var(--dusty);
-    margin-top: 2rem;
-  }
-
-  .map-link-item {
-    display: block;
-    padding: 1rem 1.25rem;
-    text-decoration: none;
-    border-right: 1px solid var(--dusty);
-    border-bottom: 1px solid var(--dusty);
-    transition: background 0.2s;
-  }
-
-  .map-link-item:hover { background: var(--blush); }
-  .map-link-item .icon { font-size: 1.1rem; margin-bottom: 0.3rem; }
-
-  .map-link-item .label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--warm);
-  }
 
   /* ── TIPS ── */
   .tips-bg {
@@ -740,7 +684,6 @@
   <div class="hero-lines"></div>
 
   <div class="hero-inner">
-    <div class="track-label"><span>★ June 10–14, 2026 — Nashville, TN ★</span></div>
     <h1 class="hero-title">
       <span class="the">The</span>
       Nashville<br>
@@ -761,147 +704,147 @@
   </div>
 </section>
 
-<!-- NAV -->
+<!-- NAV (TABS) -->
 <nav>
-  <a href="#itinerary">▶ Itinerary</a>
-  <a href="#map-section">◈ Map</a>
-  <a href="#tips">✦ Tips</a>
-  <a href="#memory">⌀ Memory Wall</a>
+  <button class="active" onclick="switchSection('things',this)">▶ Things to Do</button>
+  <button onclick="switchSection('tips',this)">✦ Tips</button>
+  <button onclick="switchSection('memory',this)">⌀ Memory Wall</button>
 </nav>
 
-<!-- ITINERARY -->
-<div id="itinerary" style="background:var(--linen);">
+<!-- THINGS TO DO -->
+<div id="things" class="section-panel active" style="background:var(--linen);">
   <div class="section-wrap">
     <div class="eyebrow">The Session Plan</div>
-    <h2 class="section-heading">Four Days in<br><em>Music City</em></h2>
+    <h2 class="section-heading">Things to <em>Do</em></h2>
     <div class="rule"></div>
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchDay('d1',this)">Wed 6/10 — Arrive</button>
-      <button class="tab-btn" onclick="switchDay('d2',this)">Thu 6/11 — History</button>
-      <button class="tab-btn" onclick="switchDay('d3',this)">Fri 6/12 — Music Row</button>
-      <button class="tab-btn" onclick="switchDay('d4',this)">Sat 6/13 — Legends</button>
+      <button class="tab-btn active" onclick="switchCat('cat-history',this)">Roots &amp; Reverence — History</button>
+      <button class="tab-btn" onclick="switchCat('cat-music',this)">Stages &amp; Sessions — Music</button>
+      <button class="tab-btn" onclick="switchCat('cat-food',this)">Smoke &amp; Spice — Food</button>
     </div>
 
-    <div class="panel active" id="d1">
-      <div class="stops">
-        <div class="card scene">
-          <div class="card-num">✈</div>
-          <div class="card-tag">🛣 Travel Day</div>
-          <div class="card-name">Roll In, Get the Lay of the Land</div>
-          <div class="card-desc">No agenda, no museums, no rushing. Get to Nashville, find somewhere good to eat, and take a slow evening drive down Broadway to see the neon light up. Let the city sink in before the real sessions begin tomorrow.</div>
-          <div class="card-meta"><span>🌆 Evening only</span><span>🍗 Great night for hot chicken</span></div>
-          <a class="card-link" href="https://www.hattieb.com" target="_blank">Hattie B's for dinner →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="d2">
+    <div class="panel active" id="cat-history">
       <div class="stops">
         <div class="card history">
           <div class="card-num">01</div>
-          <div class="card-tag">🌅 Morning</div>
+          <div class="card-tag">🏛 History</div>
           <div class="card-name">Andrew Jackson's Hermitage</div>
-          <div class="card-desc">Start early — best before the June heat peaks. The 1,120-acre estate of the 7th President: restored mansion, formal gardens, family cemetery, and preserved slave quarters that tell the full, complicated story of his era.</div>
+          <div class="card-desc">The 1,120-acre estate of the 7th President: restored mansion, formal gardens, family cemetery, and preserved slave quarters that tell the full, complicated story of his era. Best in the morning before the heat peaks.</div>
           <div class="card-meta"><span>📍 4580 Rachel's Lane</span><span>⏰ Thur–Mon, opens 9am</span><span>⌛ 2–3 hrs</span></div>
           <a class="card-link" href="https://www.thehermitage.com" target="_blank">thehermitage.com →</a>
         </div>
         <div class="card history">
           <div class="card-num">02</div>
-          <div class="card-tag">☀️ Afternoon</div>
+          <div class="card-tag">🏛 History</div>
           <div class="card-name">Fort Negley</div>
           <div class="card-desc">The largest inland stone Civil War fort, built largely by enslaved and free Black Nashvillians. Short visit but punches well above its weight — striking skyline views and powerful history underfoot. Free to visit.</div>
           <div class="card-meta"><span>📍 1100 Fort Negley Blvd</span><span>⏰ Tue–Sun</span><span>⌛ 1 hr</span><span>🆓 Free</span></div>
           <a class="card-link" href="https://www.nashville.gov/departments/parks/nature-centers-and-natural-areas/fort-negley" target="_blank">Fort Negley Park →</a>
         </div>
-        <div class="card food">
-          <div class="card-num">🍖</div>
-          <div class="card-tag">🌇 Dinner</div>
-          <div class="card-name">Peg Leg Porker</div>
-          <div class="card-desc">Cap the history day with Nashville's most celebrated BBQ — dry-rubbed ribs slow-smoked over hickory, pulled pork, sides that earn their own reputation. The Gulch is a short drive from Fort Negley. Get the ribs.</div>
-          <div class="card-meta"><span>📍 903 Gleaves St, The Gulch</span><span>⏰ Tue–Sun, Lunch &amp; Dinner</span></div>
-          <a class="card-link" href="https://www.peglegporker.com" target="_blank">peglegporker.com →</a>
+        <div class="card history">
+          <div class="card-num">03</div>
+          <div class="card-tag">🚢 History + Dinner</div>
+          <div class="card-name">General Jackson Showboat</div>
+          <div class="card-desc">A 300-foot paddle-wheel riverboat cruising the Cumberland from Opryland — three decks, dinner served on board, and a live country music revue while the Nashville skyline drifts past. History, food, and a show in one slow-moving package.</div>
+          <div class="card-meta"><span>📍 2812 Opryland Dr</span><span>⏰ Lunch &amp; dinner cruises</span><span>⌛ ~2.5 hrs</span><span>🎟 Book ahead</span></div>
+          <a class="card-link" href="https://generaljackson.com" target="_blank">generaljackson.com →</a>
         </div>
       </div>
     </div>
 
-    <div class="panel" id="d3">
+    <div class="panel" id="cat-music">
       <div class="stops">
-        <div class="card scene">
-          <div class="card-num">01</div>
-          <div class="card-tag">🌅 Morning</div>
-          <div class="card-name">iHeart Studios on Music Row</div>
-          <div class="card-desc">Start the day on Music Row — where Bobby Bones broadcasts The Bobby Bones Show to 200+ stations every weekday 5–10am. No public tours, but standing outside the building where it happens is a real moment for any Bobby Bones fan.</div>
-          <div class="card-meta"><span>📍 55 Music Square W</span><span>⏰ Drive-by, morning</span><span>⚠️ No public tours</span></div>
-          <a class="card-link" href="https://bobbybones.iheart.com" target="_blank">bobbybones.iheart.com →</a>
-        </div>
         <div class="card music">
-          <div class="card-num">02</div>
-          <div class="card-tag">🌅 Morning</div>
+          <div class="card-num">01</div>
+          <div class="card-tag">🎙 Music</div>
           <div class="card-name">RCA Studio B</div>
-          <div class="card-desc">Right down the Row from iHeart — the most famous recording studio in country music history. Elvis, Dolly, the Everly Brothers, 35,000+ songs. One of the few Music Row studios open to the public. Book through the Country Music Hall of Fame.</div>
+          <div class="card-desc">The most famous recording studio in country music history. Elvis, Dolly, the Everly Brothers, 35,000+ songs. One of the few Music Row studios open to the public. Book through the Country Music Hall of Fame.</div>
           <div class="card-meta"><span>📍 1611 Roy Acuff Pl</span><span>⏰ Tours daily</span><span>⌛ 1 hr</span><span>🎟 Book via CMHOF</span></div>
           <a class="card-link" href="https://www.countrymusichalloffame.org/plan-your-visit/rca-studio-b" target="_blank">countrymusichalloffame.org →</a>
         </div>
         <div class="card music">
-          <div class="card-num">03</div>
-          <div class="card-tag">☀️ Midday</div>
+          <div class="card-num">02</div>
+          <div class="card-tag">🎵 Music</div>
           <div class="card-name">Country Music Hall of Fame &amp; Museum</div>
           <div class="card-desc">The Smithsonian of country music — 350,000 sq ft of rhinestone costumes, vintage guitars, and two floors tracing the genre from folk roots to today. Studio B tickets are sold here, so stack them on the same visit.</div>
           <div class="card-meta"><span>📍 222 5th Ave S</span><span>⏰ 9am–5pm daily</span><span>⌛ 2–3 hrs</span></div>
           <a class="card-link" href="https://www.countrymusichalloffame.org" target="_blank">countrymusichalloffame.org →</a>
         </div>
-        <div class="card scene">
-          <div class="card-num">04</div>
-          <div class="card-tag">🌆 Evening</div>
-          <div class="card-name">Lower Broadway</div>
-          <div class="card-desc">End the day when Broadway is at its best — neon blazing, live music pouring out of every honky tonk. Walk slow. Dip into a bar, hear a song or two, move on. No cover. That's how locals do it.</div>
-          <div class="card-meta"><span>📍 Broadway, Downtown</span><span>⏰ Best after 7pm</span></div>
-          <a class="card-link" href="https://www.visitmusiccity.com" target="_blank">visitmusiccity.com →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="d4">
-      <div class="stops">
         <div class="card music">
-          <div class="card-num">01</div>
-          <div class="card-tag">🌅 Morning</div>
+          <div class="card-num">03</div>
+          <div class="card-tag">🎤 Music</div>
           <div class="card-name">Ryman Auditorium</div>
-          <div class="card-desc">The Mother Church of Country Music. The guided backstage tour puts you in dressing rooms where Hank Williams and Dolly Parton prepared for the stage — and you get a free photo on it. Start here before the crowds build.</div>
+          <div class="card-desc">The Mother Church of Country Music. The guided backstage tour puts you in dressing rooms where Hank Williams and Dolly Parton prepared for the stage — and you get a free photo on it.</div>
           <div class="card-meta"><span>📍 116 5th Ave N</span><span>⏰ Tours daily</span><span>⌛ 1.5 hrs</span></div>
           <a class="card-link" href="https://www.ryman.com/tours" target="_blank">ryman.com/tours →</a>
         </div>
         <div class="card music">
-          <div class="card-num">02</div>
-          <div class="card-tag">☀️ Midday</div>
+          <div class="card-num">04</div>
+          <div class="card-tag">🎸 Music</div>
           <div class="card-name">Johnny Cash Museum</div>
           <div class="card-desc">Walking distance from the Ryman. The world's most comprehensive collection of Cash artifacts — handwritten lyrics, personal items, awards, instruments, and the full arc from Dyess, Arkansas to "The Man in Black." Intense and unforgettable.</div>
           <div class="card-meta"><span>📍 119 3rd Ave S</span><span>⏰ 9am–7pm</span><span>⌛ 1.5 hrs</span></div>
           <a class="card-link" href="https://www.johnnycashmuseum.com" target="_blank">johnnycashmuseum.com →</a>
         </div>
-        <div class="card food">
-          <div class="card-num">🍗</div>
-          <div class="card-tag">🌞 Lunch</div>
-          <div class="card-name">Nashville Hot Chicken</div>
-          <div class="card-desc">You cannot leave without it. Prince's invented it, Hattie B's perfected the experience. Order one level below your confidence. "Hot" here is not the same as "hot" anywhere else in the universe. Milk is your friend.</div>
-          <div class="card-meta"><span>⚠️ Start at Medium</span><span>🥛 Milk is your friend</span></div>
-          <a class="card-link" href="https://www.hattieb.com" target="_blank">Hattie B's →</a>
-        </div>
         <div class="card music">
-          <div class="card-num">03</div>
-          <div class="card-tag">🌇 Evening</div>
+          <div class="card-num">05</div>
+          <div class="card-tag">⭐ Music</div>
           <div class="card-name">Grand Ole Opry</div>
-          <div class="card-desc">The big finale. Chris Janson live or a backstage tour of the world's longest-running radio show — Saturday night at the Opry is exactly as good as it sounds. Book early.</div>
-          <div class="card-meta"><span>📍 2804 Opryland Dr</span><span>⏰ Saturday show</span><span>⌛ 2–3 hrs</span></div>
+          <div class="card-desc">The big finale. A live show or a backstage tour of the world's longest-running radio program. Saturday night at the Opry is exactly as good as it sounds. Book early.</div>
+          <div class="card-meta"><span>📍 2804 Opryland Dr</span><span>⏰ Live shows weekly</span><span>⌛ 2–3 hrs</span></div>
           <a class="card-link" href="https://www.opry.com" target="_blank">opry.com →</a>
         </div>
         <div class="card music">
-          <div class="card-num">04</div>
-          <div class="card-tag">🎶 Bonus</div>
+          <div class="card-num">06</div>
+          <div class="card-tag">🎶 Music</div>
           <div class="card-name">The Bluebird Cafe</div>
-          <div class="card-desc">If the Opry is a tour rather than a show, swap the Bluebird in for the evening. Songwriter-in-the-round — intimate, no stage, just artists and their songs. Taylor Swift was discovered here. Seats are very limited — book well ahead.</div>
+          <div class="card-desc">Songwriter-in-the-round — intimate, no stage, just artists and their songs. Taylor Swift was discovered here. Seats are very limited — book well ahead.</div>
           <div class="card-meta"><span>📍 4104 Hillsboro Pike</span><span>⏰ Shows nightly</span><span>⌛ 1.5–2 hrs</span></div>
           <a class="card-link" href="https://www.bluebirdcafe.com" target="_blank">bluebirdcafe.com →</a>
+        </div>
+        <div class="card scene">
+          <div class="card-num">07</div>
+          <div class="card-tag">🌃 Music</div>
+          <div class="card-name">Lower Broadway</div>
+          <div class="card-desc">Broadway at its best — neon blazing, live music pouring out of every honky tonk. Walk slow. Dip into a bar, hear a song or two, move on. No cover. That's how locals do it.</div>
+          <div class="card-meta"><span>📍 Broadway, Downtown</span><span>⏰ Best after 7pm</span></div>
+          <a class="card-link" href="https://www.visitmusiccity.com" target="_blank">visitmusiccity.com →</a>
+        </div>
+        <div class="card scene">
+          <div class="card-num">08</div>
+          <div class="card-tag">📻 Music</div>
+          <div class="card-name">iHeart Studios on Music Row</div>
+          <div class="card-desc">Where Bobby Bones broadcasts The Bobby Bones Show to 200+ stations every weekday 5–10am. No public tours, but standing outside the building where it happens is a real moment for any Bobby Bones fan.</div>
+          <div class="card-meta"><span>📍 55 Music Square W</span><span>⏰ Drive-by</span><span>⚠️ No public tours</span></div>
+          <a class="card-link" href="https://bobbybones.iheart.com" target="_blank">bobbybones.iheart.com →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="cat-food">
+      <div class="stops">
+        <div class="card food">
+          <div class="card-num">🍗</div>
+          <div class="card-tag">🔥 Hot Chicken</div>
+          <div class="card-name">Hattie B's Hot Chicken</div>
+          <div class="card-desc">You cannot leave Nashville without it. Hattie B's is the perfected experience — order one level below your confidence. "Hot" here is not the same as "hot" anywhere else in the universe. Milk is your friend.</div>
+          <div class="card-meta"><span>📍 Multiple locations</span><span>⚠️ Start at Medium</span><span>🥛 Milk is your friend</span></div>
+          <a class="card-link" href="https://www.hattieb.com" target="_blank">hattieb.com →</a>
+        </div>
+        <div class="card food">
+          <div class="card-num">🍖</div>
+          <div class="card-tag">🔥 BBQ</div>
+          <div class="card-name">Peg Leg Porker</div>
+          <div class="card-desc">Nashville's most celebrated BBQ — dry-rubbed ribs slow-smoked over hickory, pulled pork, sides that earn their own reputation. In The Gulch. Get the ribs.</div>
+          <div class="card-meta"><span>📍 903 Gleaves St, The Gulch</span><span>⏰ Tue–Sun, Lunch &amp; Dinner</span></div>
+          <a class="card-link" href="https://www.peglegporker.com" target="_blank">peglegporker.com →</a>
+        </div>
+        <div class="card food">
+          <div class="card-num">🍕</div>
+          <div class="card-tag">🍴 Local Pick</div>
+          <div class="card-name">Iggy's</div>
+          <div class="card-desc"><em>(One-line description coming — send Mike a sentence about why this one's on the list and we'll drop it in.)</em></div>
+          <div class="card-meta"><span>📍 TBD</span></div>
         </div>
       </div>
     </div>
@@ -909,39 +852,15 @@
   </div>
 </div>
 
-<!-- MAP -->
-<div class="map-strip" id="map-section">
-  <div class="section-wrap">
-    <div class="eyebrow">Find Your Way</div>
-    <h2 class="section-heading">All Stops, <em>Mapped</em></h2>
-    <div class="rule"></div>
-    <div class="map-links">
-      <a class="map-link-item" href="https://maps.google.com/?q=Country+Music+Hall+of+Fame+Nashville" target="_blank"><div class="icon">🎵</div><div class="label">Country Music Hall of Fame</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=Ryman+Auditorium+Nashville" target="_blank"><div class="icon">🎵</div><div class="label">Ryman Auditorium</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=Grand+Ole+Opry+Nashville" target="_blank"><div class="icon">🎶</div><div class="label">Grand Ole Opry</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=Lower+Broadway+Nashville" target="_blank"><div class="icon">🌃</div><div class="label">Lower Broadway</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=Johnny+Cash+Museum+Nashville" target="_blank"><div class="icon">🎵</div><div class="label">Johnny Cash Museum</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=Andrew+Jackson+Hermitage+Nashville" target="_blank"><div class="icon">🏛</div><div class="label">The Hermitage</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=Fort+Negley+Nashville" target="_blank"><div class="icon">🏛</div><div class="label">Fort Negley</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=Hattie+B%27s+Nashville" target="_blank"><div class="icon">🍗</div><div class="label">Hattie B's Hot Chicken</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=Peg+Leg+Porker+Nashville" target="_blank"><div class="icon">🍖</div><div class="label">Peg Leg Porker</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=RCA+Studio+B+Nashville" target="_blank"><div class="icon">🎙</div><div class="label">RCA Studio B</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=Bluebird+Cafe+Nashville" target="_blank"><div class="icon">🎶</div><div class="label">Bluebird Cafe</div></a>
-      <a class="map-link-item" href="https://maps.google.com/?q=55+Music+Square+West+Nashville" target="_blank"><div class="icon">📻</div><div class="label">iHeart Studios</div></a>
-    </div>
-  </div>
-</div>
-
 <!-- TIPS -->
-<div class="tips-bg" id="tips">
+<div class="tips-bg section-panel" id="tips">
   <div class="section-wrap">
     <div class="eyebrow">From the Producer (Uncle Mike)</div>
     <h2 class="section-heading">Studio <em>Notes</em></h2>
     <div class="rule"></div>
     <div class="tips-grid">
-      <div class="tip"><div class="icon">🎟</div><h4>Book Ahead</h4><p>Ryman, Opry, Hall of Fame, and Bluebird all sell out on June weekends. Buy tickets at least a week early — don't learn this the hard way.</p></div>
       <div class="tip"><div class="icon">👟</div><h4>Wear Good Shoes</h4><p>The Hall of Fame has three full floors. Fort Negley has uneven stone paths. Comfortable walking shoes are non-negotiable in June heat.</p></div>
-      <div class="tip"><div class="icon">☀️</div><h4>Beat the June Heat</h4><p>Hot and humid. Do outdoor stops (Fort Negley, Hermitage) early morning. Hit museums through the hottest part of the day.</p></div>
+      <div class="tip"><div class="icon">👕</div><h4>What to Pack</h4><p>Nashville in June is hot and sticky — mid-80s°F by day, low-70s at night, with afternoon thunderstorms common. Pack light, breathable fabrics (cotton, linen), shorts and sundresses, a sun hat, sunglasses, and SPF. Bring a light layer for over-AC'd restaurants and venues, and a packable rain jacket or compact umbrella for the pop-up storms. Skip jeans for the daytime — you'll regret them by noon.</p></div>
       <div class="tip"><div class="icon">🍗</div><h4>The Hot Chicken Rule</h4><p>Order one spice level below what you think you can handle. "Hot" at Prince's is not the same as "Hot" anywhere else in the universe.</p></div>
       <div class="tip"><div class="icon">📷</div><h4>The Shot List</h4><p>Free Ryman stage photo (included in tour), Hall of Fame rotunda, Fort Negley skyline view. Hit all three. Post them to the Memory Wall.</p></div>
       <div class="tip"><div class="icon">🎸</div><h4>Free Live Music</h4><p>Lower Broadway bars have live bands all day — no cover. Walk in, hear a song or two, walk out. That's how locals do it.</p></div>
@@ -950,7 +869,7 @@
 </div>
 
 <!-- MEMORY WALL -->
-<div class="memory-section" id="memory">
+<div class="memory-section section-panel" id="memory">
   <div class="section-wrap">
     <div class="eyebrow">Hanna · Caleb · Riley</div>
     <h2 class="section-heading">The Memory <em>Wall</em></h2>
@@ -1000,9 +919,21 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  function switchDay(id, btn) {
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  function switchSection(id, btn) {
+    document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    const nav = document.querySelector('nav');
+    if (nav) {
+      const y = nav.getBoundingClientRect().top + window.scrollY - 1;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
+
+  function switchCat(id, btn) {
+    document.querySelectorAll('#things .panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('#things .tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     btn.classList.add('active');
   }
