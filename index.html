@@ -635,6 +635,59 @@
 
   .toast.show { opacity: 1; transform: translateY(0); }
 
+  /* ── COUNTDOWN ── */
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: clamp(0.5rem, 2vw, 1.5rem);
+    margin: 3rem 0 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cd-unit {
+    text-align: center;
+    min-width: 90px;
+  }
+
+  .cd-num {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(3rem, 11vw, 6.5rem);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--burgundy);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cd-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-top: 0.6rem;
+  }
+
+  .cd-sep {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(2.5rem, 9vw, 5.5rem);
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  .cd-target {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dusty);
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 620px) {
     .memory-form { grid-template-columns: 1fr; }
@@ -706,13 +759,31 @@
 
 <!-- NAV (TABS) -->
 <nav>
-  <button class="active" onclick="switchSection('things',this)">▶ Things to Do</button>
+  <button class="active" onclick="switchSection('countdown',this)">⏱ Countdown</button>
+  <button onclick="switchSection('things',this)">▶ Things to Do</button>
   <button onclick="switchSection('tips',this)">✦ Tips</button>
   <button onclick="switchSection('memory',this)">⌀ Memory Wall</button>
 </nav>
 
+<!-- COUNTDOWN -->
+<div id="countdown" class="section-panel active" style="background:var(--linen);">
+  <div class="section-wrap" style="text-align:center;">
+    <div class="eyebrow">Until We Roll Tape</div>
+    <h2 class="section-heading">The <em>Countdown</em></h2>
+    <div class="rule" style="margin-left:auto;margin-right:auto;"></div>
+    <div class="countdown-grid">
+      <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Days</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hours</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Minutes</div></div>
+    </div>
+    <p class="cd-target">June 10, 2026 · 11:00 PM CT · Nashville, TN</p>
+  </div>
+</div>
+
 <!-- THINGS TO DO -->
-<div id="things" class="section-panel active" style="background:var(--linen);">
+<div id="things" class="section-panel" style="background:var(--linen);">
   <div class="section-wrap">
     <div class="eyebrow">The Session Plan</div>
     <h2 class="section-heading">Things to <em>Do</em></h2>
@@ -1006,6 +1077,25 @@
   }
 
   render(load());
+
+  const COUNTDOWN_TARGET = Date.UTC(2026, 5, 11, 4, 0, 0); // 11pm CDT June 10, 2026 = 04:00 UTC June 11
+  function tickCountdown() {
+    const diff = COUNTDOWN_TARGET - Date.now();
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent  = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-mins').textContent  = '0';
+      return;
+    }
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    document.getElementById('cd-days').textContent  = days;
+    document.getElementById('cd-hours').textContent = hours;
+    document.getElementById('cd-mins').textContent  = mins;
+  }
+  tickCountdown();
+  setInterval(tickCountdown, 30000);
 </script>
 </body>
 </html>
