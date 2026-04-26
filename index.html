@@ -777,6 +777,8 @@
       <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hours</div></div>
       <div class="cd-sep">:</div>
       <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Minutes</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Seconds</div></div>
     </div>
     <p class="cd-target">June 10, 2026 · 11:00 PM CT · Nashville, TN</p>
   </div>
@@ -1085,17 +1087,20 @@
       document.getElementById('cd-days').textContent  = '0';
       document.getElementById('cd-hours').textContent = '0';
       document.getElementById('cd-mins').textContent  = '0';
+      document.getElementById('cd-secs').textContent  = '0';
       return;
     }
     const days  = Math.floor(diff / 86400000);
     const hours = Math.floor((diff % 86400000) / 3600000);
     const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
     document.getElementById('cd-days').textContent  = days;
     document.getElementById('cd-hours').textContent = hours;
     document.getElementById('cd-mins').textContent  = mins;
+    document.getElementById('cd-secs').textContent  = secs;
   }
   tickCountdown();
-  setInterval(tickCountdown, 30000);
+  setInterval(tickCountdown, 1000);
 </script>
 </body>
 </html>
