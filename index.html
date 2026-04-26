@@ -1080,7 +1080,7 @@
 
   render(load());
 
-  const COUNTDOWN_TARGET = Date.UTC(2026, 5, 11, 4, 0, 0); // 11pm CDT June 10, 2026 = 04:00 UTC June 11
+  const COUNTDOWN_TARGET = Date.UTC(2026, 5, 11, 5, 0, 0); // 11pm CT (CST-style, UTC-6) June 10, 2026 = 05:00 UTC June 11
   function tickCountdown() {
     const diff = COUNTDOWN_TARGET - Date.now();
     if (diff <= 0) {
